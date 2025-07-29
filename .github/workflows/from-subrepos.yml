@@ -24,6 +24,9 @@ jobs:
           git config user.name $GH_USER
           git config user.email $GH_EMAIL
 
+      - name: Add submodules if not present
+        run: make add-submodules
+        
       - name: Pull latest changes from submodules
         run: make pull-submodules
 
