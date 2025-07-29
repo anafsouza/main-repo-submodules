@@ -18,7 +18,8 @@ init-submodules:
 
 update-submodules:
 	cd $(TEAM_A_DIR) && git pull origin main
-	cd ../$(TEAM_B_DIR) && git pull origin main
+	cd ../
+	cd $(TEAM_B_DIR) && git pull origin main
 	cd ../
 
 pull-submodules: update-submodules
