@@ -14,6 +14,7 @@ jobs:
       - name: Checkout main repo (with submodules)
         uses: actions/checkout@v4
         with:
+          token: ${{ secrets.MLOPS_PROD_TOKEN }}
           submodules: recursive
 
       - name: Set up Git config
