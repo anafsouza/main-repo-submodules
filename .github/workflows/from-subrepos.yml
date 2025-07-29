@@ -1,0 +1,31 @@
+name: Sync submodules
+
+on:
+  # push:
+  #   branches: [main]
+  repository_dispatch:
+    types: [update-from-subrepo, update-from-subrepo-number-2]
+
+jobs:
+  sync-submodules:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout main repo (with submodules)
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Set up Git config
+        env:
+          GH_USER: ${{ secrets.USER }}
+          GH_EMAIL: ${{ secrets.EMAIL }}
+        run: |
+          git config user.name $GH_USER
+          git config user.email $GH_EMAIL
+
+      - name: Pull latest changes from submodules
+        run: make pull-submodules
+
+      - name: Commit and push if there are changes
+        run: make commit-submodules
