@@ -17,7 +17,9 @@ init-submodules:
 	git submodule update
 
 update-submodules:
-	git submodule update --remote --merge
+	cd $(TEAM_A_DIR) && git pull origin main
+	cd ../$(TEAM_B_DIR) && git pull origin main
+	cd ../
 
 pull-submodules: update-submodules
 	@echo "Pulled latest commits from all submodules."
